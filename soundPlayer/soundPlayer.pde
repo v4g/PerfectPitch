@@ -23,6 +23,7 @@ void setup()
   minim = new Minim(this);
   input = minim.getLineIn();
   out = minim.getLineOut();
+  out.setVolume(2.0);
 } 
 
 void draw()
@@ -30,7 +31,29 @@ void draw()
   if ( myPort.available() > 0) 
   {  // If data is available,
     val = myPort.readStringUntil('\n');
-    out.playNote( 2.0, 2.9, "C3" );
-  } 
-println(val); //print it out in the console
+    if (val != null) {
+      String[] result = val.split("\n");
+      if (compareStrings("red", result[0].trim())){        
+        out.playNote( 0.0, 1.0, "C3" );
+      } else if (compareStrings("blue", result[0].trim())){        
+        out.playNote( 0.0, 1.0, "G3" );
+      } else if (compareStrings("green", result[0].trim())){        
+        out.playNote( 0.0, 1.0, "F3" );
+      }
+      println(result[0]); //print it out in the console
+
+    }
+  }
+}
+
+boolean compareStrings(String s1, String s2){
+  if (s1.length() != s2.length()){
+    return false;
+  }
+  for (int i = 0; i < s1.length(); i++) {
+    if (s1.charAt(i) != s2.charAt(i)){
+      return false;
+    }
+  }
+  return true;  
 }
