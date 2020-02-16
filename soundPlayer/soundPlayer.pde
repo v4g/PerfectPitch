@@ -34,12 +34,10 @@ void draw()
     if (val != null) {
       String[] result = val.split("\n");
       if (compareStrings("red", result[0].trim())){        
-        out.playNote( 0.0, 1.0, "C3" );
-      } else if (compareStrings("blue", result[0].trim())){        
         out.playNote( 0.0, 1.0, "G3" );
-      } else if (compareStrings("green", result[0].trim())){        
-        out.playNote( 0.0, 1.0, "F3" );
-      }
+      } else if (compareStrings("blue", result[0].trim())){        
+        out.playNote( 0.0, 1.0, "C3" );
+      } 
       println(result[0]); //print it out in the console
 
     }
