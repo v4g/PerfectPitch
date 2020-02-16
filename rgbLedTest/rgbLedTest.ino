@@ -5,24 +5,12 @@ void setup() {
   pinMode(red_light_pin, OUTPUT);
   pinMode(green_light_pin, OUTPUT);
   pinMode(blue_light_pin, OUTPUT);
-}
+} 
 void loop() {
-  RGB_color(255, 0, 0); // Red
-  delay(1000);
-  RGB_color(0, 255, 0); // Green
-  delay(1000);
-  RGB_color(0, 0, 255); // Blue
-  delay(1000);
-  RGB_color(255, 255, 125); // Raspberry
-  delay(1000);
-  RGB_color(0, 255, 255); // Cyan
-  delay(1000);
-  RGB_color(255, 0, 255); // Magenta
-  delay(1000);
-  RGB_color(255, 255, 0); // Yellow
-  delay(1000);
-  RGB_color(255, 255, 255); // White
-  delay(1000);
+  RGB_color(10, 0, 0); // Red
+  delay(2000);
+  RGB_color(0, 0, 10); // Blue
+  delay(2000);
 }
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
  {
