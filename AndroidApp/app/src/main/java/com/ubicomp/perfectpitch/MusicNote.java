@@ -27,6 +27,10 @@ public class MusicNote {
         return this.note.getID();
     }
 
+    public String getName() {
+        return this.note.name();
+    }
+
     public void play() {
         this.mediaPlayer.start();
     }

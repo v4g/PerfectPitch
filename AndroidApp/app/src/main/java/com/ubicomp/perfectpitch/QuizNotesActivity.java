@@ -5,38 +5,48 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 public class QuizNotesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton[] playButtons;
-    private MediaPlayer mediaPlayer;
     private Quiz quiz;
+
+    private Button submitButton;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_notes);
 
-        quiz = new Quiz(new String[]{"c3", "g3", "e3", "c3", "e3", "g3", "e3", "c3", "g3"},
-                            new int[]{Note.C3.getColor(), Note.G3.getColor(), Color.BLACK},
-                            getApplicationContext());
+        submitButton = (Button) findViewById(R.id.submitButton);
 
-        //playNoteButton = (ImageButton) findViewById(R.id.playNoteButton);
+        // create quiz content
+        quiz = new Quiz(getApplicationContext(),
+                        new String[]{"c3", "g3", "e3"},
+                        new int[]{Note.C3.getColor(), Note.G3.getColor(), Color.BLACK});
 
-        //playNoteButton.setOnClickListener(this);
+        // set up recycler view to display the quiz
+        mRecyclerView = (RecyclerView) findViewById(R.id.questionsList);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new QuestionsRVAdapter(quiz);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 
     @Override
     public void onClick(View view) {
-        /*if (view == playNoteButton) {
-            //c3.play();
-            for (MusicNote n: cgQuiz.getNotes()) {
-                n.play();
-            }
-        }*/
+        if (view == submitButton) {
+            int[] answers = ((QuestionsRVAdapter)mAdapter).getAnswers();
+            System.out.println(quiz.getScore(answers));
+        }
     }
 }

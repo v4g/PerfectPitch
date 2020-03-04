@@ -7,31 +7,34 @@ public class Quiz {
 
     private MusicNote[] noteOrder;  // the notes for each question of the quiz
     private int[] colorChoices;  // the colors that will be available as answer choices
+    private Context context;
 
-    public Quiz(Note[] notes, int[] colorChoices, Context context) {
+    public Quiz(Context context, Note[] notes, int[] colorChoices) {
         noteOrder = new MusicNote[notes.length];
         for (int i = 0; i < notes.length; i++) {
             noteOrder[i] = new MusicNote(notes[i], context);
         }
         this.colorChoices = colorChoices;
+        this.context = context;
     }
 
-    public Quiz(String[] notes, int[] colorChoices, Context context) {
+    public Quiz(Context context, String[] notes, int[] colorChoices) {
         noteOrder = new MusicNote[notes.length];
         for (int i = 0; i < notes.length; i++) {
             noteOrder[i] = new MusicNote(notes[i], context);
         }
         this.colorChoices = colorChoices;
+        this.context = context;
     }
 
-    public Quiz(Note[] notes, Context context) {
-        this(notes, new int[]{Color.WHITE, Color.MAGENTA, Color.RED,
-                Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE}, context);
+    public Quiz(Context context, Note[] notes) {
+        this(context, notes, new int[]{Color.WHITE, Color.MAGENTA, Color.RED,
+                Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE});
     }
 
-    public Quiz(String[] notes, Context context) {
-        this(notes, new int[]{Color.WHITE, Color.MAGENTA, Color.RED,
-                Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE}, context);
+    public Quiz(Context context, String[] notes) {
+        this(context, notes, new int[]{Color.WHITE, Color.MAGENTA, Color.RED,
+                Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE});
     }
 
     public MusicNote[] getNotes() {
@@ -48,6 +51,10 @@ public class Quiz {
 
     public int getNumChoices() {
         return colorChoices.length;
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     // Given the colors selected for each quiz question, calculate the score
