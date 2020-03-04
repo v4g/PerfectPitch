@@ -16,7 +16,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_quiz);
 
         takeQuizButton = (Button) findViewById(R.id.takeQuizButton);
-
         takeQuizButton.setOnClickListener(this);
     }
 

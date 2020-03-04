@@ -27,11 +27,12 @@ public class QuizNotesActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_quiz_notes);
 
         submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(this);
 
         // create quiz content
         quiz = new Quiz(getApplicationContext(),
-                        new String[]{"c3", "g3", "e3"},
-                        new int[]{Note.C3.getColor(), Note.G3.getColor(), Color.BLACK});
+                        new String[]{"c3", "g3", "e3", "c3"},
+                        new int[]{Note.C3.getColor(), Note.G3.getColor(), Note.E3.getColor()});
 
         // set up recycler view to display the quiz
         mRecyclerView = (RecyclerView) findViewById(R.id.questionsList);
