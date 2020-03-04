@@ -19,8 +19,8 @@ void setup() {
   colors[0] = {10,0,0};
   colors[1] = {0,0,10};
   Serial.begin(9600);
-  
 }
+
 void loop() {
   Serial.println(color_codes[cur_color]);
   RGB_color(colors[cur_color].r, colors[cur_color].g, colors[cur_color].b);
