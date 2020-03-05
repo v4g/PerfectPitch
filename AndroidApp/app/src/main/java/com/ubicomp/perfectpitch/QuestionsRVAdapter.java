@@ -115,8 +115,8 @@ public class QuestionsRVAdapter extends RecyclerView.Adapter<QuestionsRVAdapter.
             return "Cyan";
         } else if (mColors[i] == Color.BLUE) {
             return "Blue";
-        } else if (mColors[i] == Color.BLACK) {
-            return "Black";
+        } else if (mColors[i] == Color.TRANSPARENT) {
+            return "None of the Above";
         }
         return "Error: Unknown Color";
     }
@@ -136,8 +136,8 @@ public class QuestionsRVAdapter extends RecyclerView.Adapter<QuestionsRVAdapter.
             return Color.CYAN;
         } else if (s.toLowerCase().equals("blue")) {
             return Color.BLUE;
-        } else if (s.toLowerCase().equals("black")) {
-            return Color.BLACK;
+        } else if (s.toLowerCase().equals("none of the above")) {
+            return Color.TRANSPARENT;
         }
         return -1;
     }

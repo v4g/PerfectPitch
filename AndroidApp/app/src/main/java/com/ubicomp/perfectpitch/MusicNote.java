@@ -34,4 +34,22 @@ public class MusicNote {
     public void play() {
         this.mediaPlayer.start();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof MusicNote)) {
+            return false;
+        }
+        MusicNote other = (MusicNote) o;
+        return this.getName().equals(other.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
 }
