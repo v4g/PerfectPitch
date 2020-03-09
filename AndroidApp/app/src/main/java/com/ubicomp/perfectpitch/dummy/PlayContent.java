@@ -42,7 +42,7 @@ public class PlayContent {
         ITEM_MAP.put(item.id, item);
     }
     public static void add() {
-        addItem(new PlayContent.PlayableItem("e", 0, 0xdd0000));
+        addItem(new PlayContent.PlayableItem("e", 0, 0));
     }
     private static PlayableItem createDummyItem(int position) {
         return new PlayableItem(String.valueOf(position), (position%PitchConstants.NOTES.length), position%PitchConstants.COLORS.length);
@@ -62,8 +62,8 @@ public class PlayContent {
      */
     public static class PlayableItem {
         public final String id;
-        public final int name ;
-        public final int color;
+        public int name ;
+        public int color;
 
         public PlayableItem(String id, int name, int color) {
             this.id = id;
