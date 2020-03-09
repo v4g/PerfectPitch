@@ -37,8 +37,8 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mNoteNameView.setText(mValues.get(position).id);
-        int[] colors = {mValues.get(position).color};
+        holder.mNoteNameView.setText(PitchConstants.NOTES[mValues.get(position).name]);
+        int[] colors = {PitchConstants.COLORS[mValues.get(position).color]};
         int[][] states = {new int[] { android.R.attr.state_enabled}};
         ColorStateList cl = new ColorStateList(states, colors);
         holder.mColorView.setBackgroundTintList(cl);

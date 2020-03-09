@@ -3,6 +3,7 @@ package com.ubicomp.perfectpitch.dummy;
 import android.graphics.Color;
 
 import com.ubicomp.perfectpitch.Note;
+import com.ubicomp.perfectpitch.PitchConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,10 +42,10 @@ public class PlayContent {
         ITEM_MAP.put(item.id, item);
     }
     public static void add() {
-        addItem(new PlayContent.PlayableItem("e", "C#", 0xdd0000));
+        addItem(new PlayContent.PlayableItem("e", 0, 0xdd0000));
     }
     private static PlayableItem createDummyItem(int position) {
-        return new PlayableItem(String.valueOf(position), "Item " + position, Color.BLUE);
+        return new PlayableItem(String.valueOf(position), (position%PitchConstants.NOTES.length), position%PitchConstants.COLORS.length);
     }
 
     private static String makeDetails(int position) {
@@ -61,10 +62,10 @@ public class PlayContent {
      */
     public static class PlayableItem {
         public final String id;
-        public final String name ;
+        public final int name ;
         public final int color;
 
-        public PlayableItem(String id, String name, int color) {
+        public PlayableItem(String id, int name, int color) {
             this.id = id;
             this.name = name;
             this.color = color;
@@ -72,7 +73,7 @@ public class PlayContent {
 
         @Override
         public String toString() {
-            return name;
+            return PitchConstants.NOTES[this.name];
         }
     }
 }
