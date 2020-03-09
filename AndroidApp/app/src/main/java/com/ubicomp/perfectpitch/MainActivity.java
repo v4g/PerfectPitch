@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // navigate to quiz screen
             Intent intentQuiz = new Intent(getApplicationContext(), QuizActivity.class);
             startActivity(intentQuiz);
+        } else
+        if (view == quizButton) {
+            // navigate to quiz screen
+            Intent intentQuiz = new Intent(getApplicationContext(), QuizActivity.class);
+            startActivity(intentQuiz);
         }
+    }
+    public void onSettingsClick(View view) {
+        // navigate to quiz screen
+        Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intentSettings);
     }
 }
