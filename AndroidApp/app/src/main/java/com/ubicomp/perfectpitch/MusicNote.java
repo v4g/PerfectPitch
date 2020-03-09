@@ -31,6 +31,18 @@ public class MusicNote {
         return this.note.name();
     }
 
+    public Note getNote() {
+        return this.note;
+    }
+
+    public Note getThird() {
+        return this.note.getThird();
+    }
+
+    public Note getFifth() {
+        return this.note.getFifth();
+    }
+
     public void play() {
         this.mediaPlayer.start();
     }

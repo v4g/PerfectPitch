@@ -13,6 +13,7 @@ public enum Note {
 
     private int color;
     private int id;
+    private static Note[] vals = values();
 
     private Note(int color, int id) {
         this.color = color;
@@ -25,5 +26,17 @@ public enum Note {
 
     public int getID() {
         return this.id;
+    }
+
+    public Note getNext() {
+        return vals[(this.ordinal() + 1) % vals.length];
+    }
+
+    public Note getThird() {
+        return vals[(this.ordinal() + 2) % vals.length];
+    }
+
+    public Note getFifth() {
+        return vals[(this.ordinal() + 4) % vals.length];
     }
 }
