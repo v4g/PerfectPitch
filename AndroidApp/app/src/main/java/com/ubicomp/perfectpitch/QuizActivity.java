@@ -23,8 +23,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == takeQuizButton) {
             // navigate to quiz screen
-            Intent intentNotesQuiz = new Intent(getApplicationContext(), QuizNotesActivity.class);
-            startActivity(intentNotesQuiz);
+            Intent intent = new Intent(getApplicationContext(), QuizSelectNotesActivity.class);
+            startActivity(intent);
         }
     }
 

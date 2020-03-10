@@ -30,7 +30,9 @@ public class QuizNotesActivity extends AppCompatActivity implements View.OnClick
         submitButton.setOnClickListener(this);
 
         // create quiz content
-        quiz = new Quiz(getApplicationContext(), new String[]{"c3"});
+        Intent intent = getIntent();
+        String[] noteNames = intent.getStringArrayExtra("selectedNotes");
+        quiz = new Quiz(getApplicationContext(), noteNames);
 
         // set up recycler view to display the quiz
         mRecyclerView = (RecyclerView) findViewById(R.id.questionsList);

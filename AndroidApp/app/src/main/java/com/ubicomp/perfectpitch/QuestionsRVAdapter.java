@@ -67,20 +67,21 @@ public class QuestionsRVAdapter extends RecyclerView.Adapter<QuestionsRVAdapter.
         holder.mNote = mNotes[position];
         holder.mContentView.setText(mNotes[position].getName());
         holder.mRadioGroup.setOrientation(LinearLayout.HORIZONTAL);
-        for (int i = 0; i < mColors.length; i++) {
-            RadioButton button = new RadioButton(mContext);
-            button.setId(View.generateViewId());
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    RadioButton selected = (RadioButton) view;
-                    int index = ((int)selected.getId() - 1) / mColors.length;
-                    int color = getColorInt((String)selected.getText());
-                    mAnswers[index] = color;
-                }
-            });
-            button.setText(getColorName(i));
-            holder.mRadioGroup.addView(button);
+        if (holder.mRadioGroup.getChildCount() == 0) {
+            for (int i = 0; i < mColors.length; i++) {
+                RadioButton button = new RadioButton(mContext);
+                button.setId(View.generateViewId());
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        RadioButton selected = (RadioButton) view;
+                        int color = getColorInt((String) selected.getText());
+                        mAnswers[holder.getAdapterPosition()] = color;
+                    }
+                });
+                button.setText(getColorName(i));
+                holder.mRadioGroup.addView(button);
+            }
         }
 
         // play note when play button is clicked
@@ -116,7 +117,7 @@ public class QuestionsRVAdapter extends RecyclerView.Adapter<QuestionsRVAdapter.
         } else if (mColors[i] == Color.BLUE) {
             return "Blue";
         } else if (mColors[i] == Color.TRANSPARENT) {
-            return "None of the Above";
+            return "Other";
         }
         return "Error: Unknown Color";
     }
@@ -136,7 +137,7 @@ public class QuestionsRVAdapter extends RecyclerView.Adapter<QuestionsRVAdapter.
             return Color.CYAN;
         } else if (s.toLowerCase().equals("blue")) {
             return Color.BLUE;
-        } else if (s.toLowerCase().equals("none of the above")) {
+        } else if (s.toLowerCase().equals("other")) {
             return Color.TRANSPARENT;
         }
         return -1;
