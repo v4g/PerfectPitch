@@ -57,6 +57,17 @@ public class PlayContent {
         return builder.toString();
     }
 
+    public static void loadDefaultOption(int position) {
+        ITEMS.clear();
+        ITEM_MAP.clear();
+        int[] l = PitchConstants.DEFAULT_PLAYABLE_NOTES.get(position);
+        for (int i = 0; i < l.length; i++) {
+            PlayableItem item = new PlayableItem(new Integer(i).toString(), l[i], PitchConstants.DEFAULT_PLAYABLE_COLORS[position][i] );
+            ITEMS.add(item);
+            ITEM_MAP.put(item.id, item);
+        }
+    }
+
     /**
      * A dummy item representing a piece of content.
      */

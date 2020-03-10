@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:name="com.ubicomp.perfectpitch.PlayableItemFragment"
     android:layout_width="match_parent"
@@ -8,17 +8,26 @@
     android:orientation="vertical"
     tools:context=".PlayableItemFragment">
 
+    <Spinner
+        android:id="@+id/spinnerOptions"
+        android:layout_width="match_parent"
+        android:layout_height="46dp" />
+
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/fragment_playableitem"
-        tools:context=".PlayableItemFragment">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerOptions"
+        tools:context=".PlayableItemFragment"
+        tools:listitem="@layout/fragment_playableitem">
         <!--app:layoutManager="LinearLayoutManager"-->
 
 
@@ -26,10 +35,11 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addNoteBtn"
-        android:layout_width="84dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
         android:onClick="onAddClick"
         android:src="@android:drawable/ic_input_add"
@@ -39,4 +49,4 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:context=".PlayableItemFragment" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -7,12 +7,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.ubicomp.perfectpitch.dummy.PlayContent;
 import com.ubicomp.perfectpitch.dummy.PlayContent.PlayableItem;
+
+import java.io.Console;
 
 /**
  * A fragment representing a list of Items.
@@ -29,6 +35,8 @@ public class PlayableItemFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private MyPlayableItemRecyclerViewAdapter adapter;
     private FloatingActionButton addBtn;
+    private Spinner defaultOptions;
+    private ArrayAdapter<String> optionsAdapter;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -53,6 +61,8 @@ public class PlayableItemFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
     }
 
     @Override
@@ -83,6 +93,27 @@ public class PlayableItemFragment extends Fragment {
             adapter = new MyPlayableItemRecyclerViewAdapter(PlayContent.ITEMS, mListener);
             recyclerView.setAdapter(adapter);
         }
+
+        defaultOptions = view.findViewById(R.id.spinnerOptions);
+        if (optionsAdapter == null) {
+            optionsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item);
+            optionsAdapter.addAll(PitchConstants.DEFAULT_PLAYABLE_OPTIONS);
+            optionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        defaultOptions.setAdapter((optionsAdapter));
+        defaultOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Spinner", parent.getItemAtPosition(position).toString());
+                PlayContent.loadDefaultOption(position);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return view;
     }
 
