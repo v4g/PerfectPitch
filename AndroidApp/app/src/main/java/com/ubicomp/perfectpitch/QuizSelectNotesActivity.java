@@ -32,6 +32,7 @@ public class QuizSelectNotesActivity extends AppCompatActivity implements View.O
             final CheckBox check = new CheckBox(this);
             check.setId(View.generateViewId());
             check.setText(notes[i].name());
+            check.setTextColor(notes[i].getColor());
             check.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

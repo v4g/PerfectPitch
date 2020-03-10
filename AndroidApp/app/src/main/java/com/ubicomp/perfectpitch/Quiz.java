@@ -17,13 +17,13 @@ public class Quiz {
     private Context context;  // application context where the quiz takes place and notes are played
     private int NUM_QUESTIONS = 10;  // number of questions in each quiz
 
-    // Quiz constructor that takes an array of Notes and creates a 10 question quiz
+    // Quiz constructor that takes an array of Notes and creates a NUM_QUESTIONS length quiz
     public Quiz(Context context, Note[] notes) {
         this.context = context;
         createQuestions(notes);
     }
 
-    // Quiz constructor that takes an array of note names and creates a 10 question quiz
+    // Quiz constructor that takes an array of note names and creates a NUM_QUESTIONS length quiz
     public Quiz(Context context, String[] notes) {
         this.context = context;
         createQuestions(notes);
