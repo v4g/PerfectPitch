@@ -1,11 +1,15 @@
 package com.ubicomp.perfectpitch;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -25,27 +29,37 @@ public class QuizSelectNotesActivity extends AppCompatActivity implements View.O
         takeQuizButton.setOnClickListener(this);
 
         LinearLayout layout = (LinearLayout)findViewById(R.id.selectNotesLayout);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(10, 10, 10, 10);
 
-        Note[] notes = Note.values();
+        final Note[] notes = Note.values();
         selected = new ArrayList<>();
         for (int i = 0; i < notes.length; i++) {
-            final CheckBox check = new CheckBox(this);
-            check.setId(View.generateViewId());
-            check.setText(notes[i].name());
-            check.setTextColor(notes[i].getColor());
-            check.setOnClickListener(new View.OnClickListener() {
+            Button checked = new Button(this);
+            checked.setId(View.generateViewId());
+            checked.setText(notes[i].name());
+            checked.setBackgroundColor(Color.WHITE);
+            checked.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CheckBox checked = (CheckBox) view;
-                    String s = "" + checked.getText();
-                    if (selected.contains(s)) {
-                        selected.remove(s);
+                    Button checked = (Button) view;
+                    String noteName = "" + checked.getText();
+                    Note n = Note.valueOf(noteName);
+                    if (selected.contains(noteName)) {
+                        selected.remove(noteName);
+                        checked.setBackgroundColor(Color.WHITE);
                     } else {
-                        selected.add(s);
+                        selected.add(noteName);
+                        Color c = Color.valueOf(n.getColor());
+                        if (n.getColor() == Color.WHITE) {
+                            c = Color.valueOf(Color.LTGRAY);
+                        }
+                        checked.setBackgroundColor(Color.argb(0.4f, c.red(), c.green(), c.blue()));
                     }
                 }
             });
-            layout.addView(check);
+            layout.addView(checked, layoutParams);
         }
     }
 
