@@ -6,24 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".QuizNotesActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/questionsList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/submitButton"
+    <TextView
+        android:id="@+id/questionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.v7.widget.RecyclerView>
+    <ImageButton
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionLabel"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
+    <RadioGroup
+        android:id="@+id/answerChoices"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playButton" />
 
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

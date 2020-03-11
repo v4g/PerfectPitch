@@ -33,6 +33,10 @@ public class Quiz {
         return noteOrder;
     }
 
+    public MusicNote getQuestion(int i) {
+        return noteOrder[i - 1];
+    }
+
     public int[] getColorChoices() {
         return colorChoices;
     }
@@ -127,7 +131,6 @@ public class Quiz {
         for (int i = 0; i < notesTested.size(); i++) {
             colorChoices[i] = questionChoices.get(i).getColor();
         }
-        Arrays.sort(colorChoices);
 
         // fill the noteOrder array with semi-random permutations of note order
         int filled = 0;

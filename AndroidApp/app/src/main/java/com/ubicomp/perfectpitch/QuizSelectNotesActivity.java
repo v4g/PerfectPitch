@@ -36,30 +36,30 @@ public class QuizSelectNotesActivity extends AppCompatActivity implements View.O
         final Note[] notes = Note.values();
         selected = new ArrayList<>();
         for (int i = 0; i < notes.length; i++) {
-            Button checked = new Button(this);
-            checked.setId(View.generateViewId());
-            checked.setText(notes[i].name());
-            checked.setBackgroundColor(Color.WHITE);
-            checked.setOnClickListener(new View.OnClickListener() {
+            Button button = new Button(this);
+            button.setId(View.generateViewId());
+            button.setText(notes[i].name());
+            button.setBackgroundColor(Color.WHITE);
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Button checked = (Button) view;
-                    String noteName = "" + checked.getText();
+                    Button button = (Button) view;
+                    String noteName = "" + button.getText();
                     Note n = Note.valueOf(noteName);
                     if (selected.contains(noteName)) {
                         selected.remove(noteName);
-                        checked.setBackgroundColor(Color.WHITE);
+                        button.setBackgroundColor(Color.WHITE);
                     } else {
                         selected.add(noteName);
                         Color c = Color.valueOf(n.getColor());
                         if (n.getColor() == Color.WHITE) {
                             c = Color.valueOf(Color.LTGRAY);
                         }
-                        checked.setBackgroundColor(Color.argb(0.4f, c.red(), c.green(), c.blue()));
+                        button.setBackgroundColor(Color.argb(0.4f, c.red(), c.green(), c.blue()));
                     }
                 }
             });
-            layout.addView(checked, layoutParams);
+            layout.addView(button, layoutParams);
         }
     }
 
