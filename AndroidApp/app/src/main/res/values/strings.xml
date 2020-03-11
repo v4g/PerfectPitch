@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Perfect Pitch</string>
 
+    <!-- Quiz Strings -->
     <string name="next_question">Next</string>
     <string name="submit_quiz">Submit</string>
+
+    <!-- Select Notes Strings -->
+    <string name="take_quiz">Take Quiz</string>
 </resources>

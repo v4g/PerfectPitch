@@ -66,9 +66,13 @@ public class QuizSelectNotesActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         if (view == takeQuizButton) {
-            Intent intent = new Intent(this, QuizNotesActivity.class);
-            intent.putExtra("selectedNotes", toStringArray(selected));
-            startActivity(intent);
+            if (selected.size() == 0) {
+                // TODO: put error toast here
+            } else {
+                Intent intent = new Intent(this, QuizNotesActivity.class);
+                intent.putExtra("selectedNotes", toStringArray(selected));
+                startActivity(intent);
+            }
         }
     }
 
