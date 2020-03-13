@@ -122,7 +122,7 @@ public class QuizNotesActivity extends AppCompatActivity implements View.OnClick
 
     private void showNextQuestion() {
         if (selectedColor == 1) {  // haven't selected answer choice yet
-            //TODO: put error message here
+            Toast.makeText(getApplicationContext(),"Please select an answer",Toast.LENGTH_LONG).show();
         } else {  // next question
             answers[currentQuestion - 1] = selectedColor;
             currentQuestion++;

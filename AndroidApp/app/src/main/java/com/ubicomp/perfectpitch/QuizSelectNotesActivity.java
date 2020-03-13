@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class QuizSelectNotesActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         if (view == takeQuizButton) {
             if (selected.size() == 0) {
-                // TODO: put error toast here
+                Toast.makeText(getApplicationContext(),"Please select at least one note",Toast.LENGTH_LONG).show();
             } else {
                 Intent intent = new Intent(this, QuizNotesActivity.class);
                 intent.putExtra("selectedNotes", toStringArray(selected));
