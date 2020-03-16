@@ -45,22 +45,22 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-//        holder.mNoteNameView.setText(PitchConstants.NOTES[mValues.get(position).name]);
-        holder.mSpinnerView.setSelection(mValues.get(position).name);
+        holder.mNoteNameView.setText(PitchConstants.NOTES[mValues.get(position).name]);
+//        holder.mSpinnerView.setSelection(mValues.get(position).name);
         int[] colors = {PitchConstants.COLORS[mValues.get(position).color]};
         int[][] states = {new int[] { android.R.attr.state_enabled}};
         ColorStateList cl = new ColorStateList(states, colors);
-        holder.mColorView.setBackgroundTintList(cl);
+//        holder.mColorView.setBackgroundTintList(cl);
 
         final MyPlayableItemRecyclerViewAdapter adapter = this;
 
-        holder.mColorView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.mItem.color = (holder.mItem.color + 1) % PitchConstants.COLORS.length;
-                adapter.notifyDataSetChanged();
-            }
-        });
+//        holder.mColorView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                holder.mItem.color = (holder.mItem.color + 1) % PitchConstants.COLORS.length;
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,23 +80,23 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-//        public final TextView mNoteNameView;
-        public final TextView mColorView;
-        public final Spinner mSpinnerView;
+        public final TextView mNoteNameView;
+//        public final TextView mColorView;
+//        public final Spinner mSpinnerView;
         public PlayableItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-//            mNoteNameView = (TextView) view.findViewById(R.id.noteName);
-            mColorView = (TextView) view.findViewById(R.id.color);
-            mSpinnerView = (Spinner) view.findViewById(R.id.spinner);
-            mSpinnerView.setAdapter(spinnerAdapter);
+            mNoteNameView = (TextView) view.findViewById(R.id.noteName);
+//            mColorView = (TextView) view.findViewById(R.id.color);
+//            mSpinnerView = (Spinner) view.findViewById(R.id.spinner);
+//            mSpinnerView.setAdapter(spinnerAdapter);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mColorView.getText() + "'";
+            return super.toString() + " '" + mNoteNameView.toString() + "'";
         }
     }
 }

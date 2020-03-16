@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="157dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="100dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/color"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="146dp"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="100dp"
+    <TextView
+        android:id="@+id/noteName"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
         android:layout_weight="1"
-        android:backgroundTint="@color/design_default_color_primary"
-        android:padding="10dp"
-        android:textColorLink="@color/colorPrimaryDark" />
+        android:background="@android:color/holo_orange_light"
+        android:backgroundTint="?attr/colorButtonNormal"
+        android:text="TextView"
+        android:textAlignment="center" />
 
 </LinearLayout>
