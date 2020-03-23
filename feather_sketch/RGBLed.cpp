@@ -4,11 +4,19 @@
 #define RED 'r'
 #define GREEN 'g'
 #define BLUE 'b'
+#define WHITE 'w'
+#define CYAN 'c'
+#define YELLOW 'y'
+#define MAGENTA 'm'
 
 const int off[3] = {0, 0, 0};
 const int red[3] = {10, 0, 0};
 const int green[3] = {0, 10, 0};
 const int blue[3] = {0, 0, 10};
+const int yellow[3] = {10, 10, 0};
+const int cyan[3] = {0, 10, 10};
+const int magenta[3] = {10, 0, 10};
+const int white[3] = {10, 10, 10};
 
 const int redChannel = 0;
 const int greenChannel = 1;
@@ -45,6 +53,18 @@ void RGBLed::updateLed(char color) {
       break;
     case BLUE:
       rgbVal = blue;
+      break;
+    case WHITE:
+      rgbVal = white;
+      break;
+    case CYAN:
+      rgbVal = cyan;
+      break;
+    case MAGENTA:
+      rgbVal = magenta;
+      break;
+    case YELLOW:
+      rgbVal = yellow;
       break;
     default:
       rgbVal = off;

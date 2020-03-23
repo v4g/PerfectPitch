@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <TextView
+    <Button
         android:id="@+id/noteName"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_weight="1"
-        android:background="@android:color/holo_orange_light"
-        android:backgroundTint="?attr/colorButtonNormal"
-        android:text="TextView"
-        android:textAlignment="center" />
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.3" />
 
 </LinearLayout>

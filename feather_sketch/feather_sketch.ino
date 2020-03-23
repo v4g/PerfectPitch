@@ -1,3 +1,6 @@
+#include <Adafruit_CircuitPlayground.h>
+#include <Adafruit_Circuit_Playground.h>
+
 #include <dummy.h>
 #include <BLEDevice.h>
 #include <BLEUtils.h>

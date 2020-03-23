@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ubicomp.perfectpitch.PlayableItemFragment.OnListFragmentInteractionListener;
+import com.ubicomp.perfectpitch.dummy.PlayContent;
 import com.ubicomp.perfectpitch.dummy.PlayContent.PlayableItem;
 
 import java.util.List;
@@ -24,12 +26,17 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
     private final List<PlayableItem> mValues;
     private final OnListFragmentInteractionListener mListener;
     static ArrayAdapter<String> spinnerAdapter;
+    private Spinner mSpinner;
 
     public MyPlayableItemRecyclerViewAdapter(List<PlayableItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
+    public void attachSpinner(Spinner spinner) {
+        mSpinner = spinner;
+
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (spinnerAdapter == null) {
@@ -45,22 +52,14 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mNoteNameView.setText(PitchConstants.NOTES[mValues.get(position).name]);
-//        holder.mSpinnerView.setSelection(mValues.get(position).name);
-        int[] colors = {PitchConstants.COLORS[mValues.get(position).color]};
+        holder.mNoteNameView.setText(mValues.get(position).name);
+        int[] colors = {NoteToColorMap.getInstance().color(mValues.get(position).name)};
         int[][] states = {new int[] { android.R.attr.state_enabled}};
         ColorStateList cl = new ColorStateList(states, colors);
-//        holder.mColorView.setBackgroundTintList(cl);
-
+        holder.mNoteNameView.setBackgroundTintList(cl);
+        final int index = position;
         final MyPlayableItemRecyclerViewAdapter adapter = this;
 
-//        holder.mColorView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                holder.mItem.color = (holder.mItem.color + 1) % PitchConstants.COLORS.length;
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +72,22 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
         });
     }
 
+    public void deleteItem(int index) {
+        PlayContent.remove(index);
+        updateSpinner();
+        notifyDataSetChanged();
+    }
+
+    public void moveItem(int from, int to) {
+        PlayableItem item = PlayContent.remove(from);
+        PlayContent.addAtPosition(item, to);
+        updateSpinner();
+        notifyDataSetChanged();
+    }
+
+    public void updateSpinner() {
+        mSpinner.setSelection(PitchConstants.DEFAULT_PLAYABLE_OPTIONS.length - 1);
+    }
     @Override
     public int getItemCount() {
         return mValues.size();
@@ -80,7 +95,7 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mNoteNameView;
+        public final Button mNoteNameView;
 //        public final TextView mColorView;
 //        public final Spinner mSpinnerView;
         public PlayableItem mItem;
@@ -88,7 +103,7 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mNoteNameView = (TextView) view.findViewById(R.id.noteName);
+            mNoteNameView = (Button) view.findViewById(R.id.noteName);
 //            mColorView = (TextView) view.findViewById(R.id.color);
 //            mSpinnerView = (Spinner) view.findViewById(R.id.spinner);
 //            mSpinnerView.setAdapter(spinnerAdapter);

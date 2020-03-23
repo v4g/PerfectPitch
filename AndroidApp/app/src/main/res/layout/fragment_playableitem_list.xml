@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".PlayableItemFragment">
 
+    <TextView
+        android:id="@+id/textInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Select the notes to play from the dropdown or create your own"
+        android:textAlignment="gravity"
+        android:textSize="18sp" />
+
     <Spinner
         android:id="@+id/spinnerOptions"
         android:layout_width="match_parent"

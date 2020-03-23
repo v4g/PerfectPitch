@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,7 @@ public class PlayableItemFragment extends Fragment {
                 if (adapter != null) {
                     adapter.notifyDataSetChanged();
                 }
+                defaultOptions.setSelection(PitchConstants.DEFAULT_PLAYABLE_OPTIONS.length - 1);
             }
         });
         if (rv_view instanceof RecyclerView) {
@@ -92,6 +94,10 @@ public class PlayableItemFragment extends Fragment {
             }
             adapter = new MyPlayableItemRecyclerViewAdapter(PlayContent.ITEMS, mListener);
             recyclerView.setAdapter(adapter);
+            ItemTouchHelper itemTouchHelper = new
+                    ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+            itemTouchHelper.attachToRecyclerView(recyclerView);
+
         }
 
         defaultOptions = view.findViewById(R.id.spinnerOptions);
@@ -114,6 +120,7 @@ public class PlayableItemFragment extends Fragment {
 
             }
         });
+        adapter.attachSpinner(defaultOptions);
         return view;
     }
 
