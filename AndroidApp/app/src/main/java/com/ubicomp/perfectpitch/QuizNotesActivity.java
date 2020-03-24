@@ -3,25 +3,26 @@ package com.ubicomp.perfectpitch;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatRadioButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.List;
 
 public class QuizNotesActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -137,7 +138,16 @@ public class QuizNotesActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void submitQuiz() {
-        System.out.println(quiz.getScore(answers));
+        int score = quiz.getScore(answers);
+        List<Note> tested = quiz.getNotesTested();
+        String testedNotes = "";
+        for (Note n: tested) {
+            testedNotes += n.name();
+        }
+        Intent intent = new Intent(this, QuizResultActivity.class);
+        intent.putExtra("score", score);
+        intent.putExtra("notes", testedNotes);
+        startActivity(intent);
     }
 
     private String getColorName(int color) {
