@@ -4,6 +4,8 @@
     <!-- Quiz Strings -->
     <string name="next_question">Next</string>
     <string name="submit_quiz">Submit</string>
+    <string name="return_to_home">Return to Home</string>
+    <string name="score_title">Score</string>
 
     <!-- Select Notes Strings -->
     <string name="take_quiz">Take Quiz</string>

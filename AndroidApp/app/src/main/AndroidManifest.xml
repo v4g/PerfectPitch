@@ -12,7 +12,6 @@
         <activity android:name=".HistoryActivity"></activity>
         <activity android:name=".QuizResultActivity" />
         <activity android:name=".QuizSelectNotesActivity" />
-        <activity android:name=".QuizActivity" />
         <activity android:name=".QuizNotesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

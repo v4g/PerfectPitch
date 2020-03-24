@@ -17,7 +17,6 @@ import java.io.OutputStreamWriter;
 public class QuizResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button homeButton;
-    private Button historyButton;
     private TextView scoreTextView;
 
     private int score;
@@ -30,9 +29,6 @@ public class QuizResultActivity extends AppCompatActivity implements View.OnClic
 
         homeButton = (Button) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(this);
-
-        historyButton = (Button) findViewById(R.id.historyButton);
-        historyButton.setOnClickListener(this);
 
         Intent intent = getIntent();
         score = intent.getIntExtra("score", -1);
@@ -49,11 +45,6 @@ public class QuizResultActivity extends AppCompatActivity implements View.OnClic
             // navigate to home screen
             Intent intentHome = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intentHome);
-        }
-        if (view == historyButton) {
-            // navigate to history screen
-            Intent intentHistory = new Intent(getApplicationContext(), HistoryActivity.class);
-            startActivity(intentHistory);
         }
     }
 
