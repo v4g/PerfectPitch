@@ -1,10 +1,6 @@
 package com.ubicomp.perfectpitch.dummy;
 
-import android.graphics.Color;
-import android.util.Log;
-
 import com.ubicomp.perfectpitch.Note;
-import com.ubicomp.perfectpitch.NoteToColorMap;
 import com.ubicomp.perfectpitch.PitchConstants;
 
 import java.util.ArrayList;
@@ -22,8 +18,8 @@ import static com.ubicomp.perfectpitch.PitchConstants.DEFAULT_PLAYABLE_OPTIONS;
  */
 public class PlayContent {
 
-    public static final List<PlayableItem> ITEMS = new ArrayList<PlayableItem>();
-    public static final Map<String, PlayableItem> ITEM_MAP = new HashMap<String, PlayableItem>();
+    public static final List<Note> ITEMS = new ArrayList<Note>();
+    public static final Map<String, Note> ITEM_MAP = new HashMap<String, Note>();
 
 
     private static final int COUNT = 25;
@@ -33,60 +29,31 @@ public class PlayContent {
         loadDefaultOption(0);
     }
 
-    private static void addItem(PlayableItem item) {
+    private static void addItem(Note item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.name(), item);
     }
     public static void add() {
-        addItem(new PlayContent.PlayableItem("e", "C", Color.RED));
+        addItem(Note.C3);
     }
-    public static void addAtPosition( PlayableItem item, int position) {
-        ITEMS.add(position, item);
-        ITEM_MAP.put(item.id, item);
+    public static void addAtPosition( Note note, int position) {
+        ITEMS.add(position, note);
+        ITEM_MAP.put(note.name(), note);
     }
-    public static PlayableItem remove(int position) {
-        PlayableItem item = ITEMS.get(position);
+    public static Note remove(int position) {
+        Note item = ITEMS.get(position);
         ITEM_MAP.remove(ITEMS.get(position));
         ITEMS.remove(position);
         return item;
     }
-    private static PlayableItem createDummyItem(int position) {
-        return new PlayableItem(String.valueOf(position), PitchConstants.NOTES[(position%PitchConstants.NOTES.length)], PitchConstants.COLORS[position%PitchConstants.COLORS.length]);
-    }
-
     public static void loadDefaultOption(int position) {
         if (position >= DEFAULT_PLAYABLE_OPTIONS.length - 1) {
             return;
         }
         ITEMS.clear();
         ITEM_MAP.clear();
-        String[] l = PitchConstants.DEFAULT_PLAYABLE_NOTES.get(position);
-        NoteToColorMap m = NoteToColorMap.getInstance();
-        for (int i = 0; i < l.length; i++) {
-            PlayableItem item = new PlayableItem(new Integer(i).toString(), l[i], m.color(l[i]) );
-            Log.d("PlayContent",l[i]);
-            ITEMS.add(item);
-            ITEM_MAP.put(item.id, item);
-        }
-    }
-
-    /**
-     * A dummy item representing a piece of content.
-     */
-    public static class PlayableItem {
-        public final String id;
-        public String name ;
-        public int color;
-
-        public PlayableItem(String id, String name, int color) {
-            this.id = id;
-            this.name = name;
-            this.color = color;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
+        for (Note n : PitchConstants.DEFAULT_PLAYABLE_NOTES.get(position)) {
+            addItem(n);
         }
     }
 }

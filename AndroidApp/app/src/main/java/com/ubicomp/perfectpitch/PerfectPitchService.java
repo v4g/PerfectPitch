@@ -21,19 +21,15 @@ import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ubicomp.perfectpitch.dummy.PlayContent;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
-import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
 import static android.content.ContentValues.TAG;
 
 /**
@@ -44,9 +40,7 @@ import static android.content.ContentValues.TAG;
  * helper methods.
  */
 public class PerfectPitchService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private BluetoothAdapter bluetoothAdapter;
+   private BluetoothAdapter bluetoothAdapter;
     private boolean mScanning;
     public final String DEVICE_NAME = "PerfectPitch";
     private Handler handler = new Handler();
@@ -227,28 +221,28 @@ public class PerfectPitchService extends IntentService {
     }
 
     class TransmitToDevice extends TimerTask {
-        Map<Integer, String> colorToMap = new HashMap<Integer, String>();
+        Map<Integer, String> colorToCodeMap = new HashMap<Integer, String>();
         MusicNote musicNotes[];
         int i = 0;
 
         public TransmitToDevice() {
-            colorToMap.put(Color.MAGENTA, "m");
-            colorToMap.put(Color.WHITE, "w");
-            colorToMap.put(Color.BLUE, "b");
-            colorToMap.put(Color.CYAN, "c");
-            colorToMap.put(Color.GREEN, "g");
-            colorToMap.put(Color.YELLOW, "y");
-            colorToMap.put(Color.RED, "r");
+            colorToCodeMap.put(Color.MAGENTA, "m");
+            colorToCodeMap.put(Color.WHITE, "w");
+            colorToCodeMap.put(Color.BLUE, "b");
+            colorToCodeMap.put(Color.CYAN, "c");
+            colorToCodeMap.put(Color.GREEN, "g");
+            colorToCodeMap.put(Color.YELLOW, "y");
+            colorToCodeMap.put(Color.RED, "r");
         }
 
         @Override
         public void run() {
             // run on another thread
-            PlayContent.PlayableItem item = PlayContent.ITEMS.get(i);
-            Log.d("PerfectPitchService", "Playing" + item.name);
+            Note item = PlayContent.ITEMS.get(i);
+            Log.d("PerfectPitchService", "Playing" + item.name());
             SoundManager.getInstance().stop();
-            SoundManager.getInstance().play(item.name);
-            String col = colorToMap.get(item.color);
+            SoundManager.getInstance().play(item);
+            String col = colorToCodeMap.get(item.getColor());
             characteristic.setValue(col);
             i = (i + 1) % PlayContent.ITEMS.size();
             gatt.writeCharacteristic(characteristic);

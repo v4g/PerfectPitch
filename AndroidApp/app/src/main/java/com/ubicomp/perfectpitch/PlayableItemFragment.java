@@ -15,11 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import com.ubicomp.perfectpitch.dummy.PlayContent;
-import com.ubicomp.perfectpitch.dummy.PlayContent.PlayableItem;
-
-import java.io.Console;
 
 /**
  * A fragment representing a list of Items.
@@ -154,10 +150,6 @@ public class PlayableItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(PlayableItem item);
-    }
-
-    public void onAddClick(View v) {
-        PlayContent.add();
+        void onListFragmentInteraction(Note item);
     }
 }

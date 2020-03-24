@@ -15,6 +15,6 @@ public class SettingsActivity extends AppCompatActivity implements PlayableItemF
     }
 
     @Override
-    public void onListFragmentInteraction(PlayContent.PlayableItem item) {
+    public void onListFragmentInteraction(Note item) {
     }
 }
