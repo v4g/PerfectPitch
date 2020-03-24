@@ -3,13 +3,13 @@ package com.ubicomp.perfectpitch;
 import android.graphics.Color;
 
 public enum Note {
-    C3(Color.BLUE, R.raw.c3),
-    D3(Color.CYAN, R.raw.d3),
-    E3(Color.GREEN, R.raw.e3),
-    F3(Color.YELLOW, R.raw.f3),
-    G3(Color.RED, R.raw.g3),
-    A3(Color.MAGENTA, R.raw.a3),
-    B3(Color.WHITE, R.raw.b3);
+    C3(Color.BLUE, R.raw.c3t),
+    D3(Color.CYAN, R.raw.d3t),
+    E3(Color.GREEN, R.raw.e3t),
+    F3(Color.YELLOW, R.raw.f3t),
+    G3(Color.RED, R.raw.g3t),
+    A3(Color.MAGENTA, R.raw.a3t),
+    B3(Color.WHITE, R.raw.b3t);
 
     private int color;
     private int id;
