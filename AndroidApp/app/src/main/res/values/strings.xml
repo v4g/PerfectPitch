@@ -9,6 +9,10 @@
 
     <!-- Select Notes Strings -->
     <string name="take_quiz">Take Quiz</string>
+    <string name="take_a_quiz">Take a Quiz</string>
+
+    <string name="settings">Settings</string>
+    <string name="history">View History</string>
 
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="ble_not_supported">BLE is not supported on this device. I won\'t run</string>

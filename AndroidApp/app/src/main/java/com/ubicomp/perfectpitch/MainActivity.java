@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button quizButton;
     private Button historyButton;
+    private Button settingsButton;
 
     private static final int REQUEST_ENABLE_BT = 11;
     private boolean isServiceRunning = false;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         historyButton = (Button) findViewById(R.id.historyButton);
         historyButton.setOnClickListener(this);
+
+        settingsButton = (Button) findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(this);
 
         playButton = (Button) findViewById(R.id.playButton);
 
@@ -64,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intentHistory = new Intent(getApplicationContext(), HistoryActivity.class);
             startActivity(intentHistory);
         }
+        if (view == settingsButton) {
+            // navigate to settings screen
+            Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intentSettings);
+        }
     }
 
     public void onPlayClick(View view) {
@@ -76,12 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startService();
             }
         }
-    }
-
-    public void onSettingsClick(View view) {
-        // navigate to quiz screen
-        Intent intentSettings = new Intent(getApplicationContext(), SettingsActivity.class);
-        startActivity(intentSettings);
     }
 
     @Override
