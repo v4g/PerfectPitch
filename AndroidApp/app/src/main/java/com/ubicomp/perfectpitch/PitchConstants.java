@@ -1,12 +1,7 @@
 package com.ubicomp.perfectpitch;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PitchConstants {
     public static String DEFAULT_PLAYABLE_OPTIONS[] = {"Chromatic Scale", "C-G", "C-E-G", "Custom"};
