@@ -26,7 +26,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         homeButton.setOnClickListener(this);
 
         String[] scores = getScoreHistory();
-        String res = "";
+        String res = "Time:Notes:Score\n";
         for (String s: scores) {
             res += s + "\n";
         }
