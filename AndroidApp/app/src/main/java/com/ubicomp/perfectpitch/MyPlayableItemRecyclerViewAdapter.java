@@ -92,7 +92,6 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
         Note item = PlayContent.remove(from);
         PlayContent.addAtPosition(item, to);
         updateSpinner();
-        notifyDataSetChanged();
     }
 
     public void updateSpinner() {
