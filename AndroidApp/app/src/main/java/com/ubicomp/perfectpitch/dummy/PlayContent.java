@@ -1,8 +1,16 @@
 package com.ubicomp.perfectpitch.dummy;
 
+import android.content.Context;
+import android.os.ParcelFileDescriptor;
+
 import com.ubicomp.perfectpitch.Note;
 import com.ubicomp.perfectpitch.PitchConstants;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,13 +55,59 @@ public class PlayContent {
         return item;
     }
     public static void loadDefaultOption(int position) {
-        if (position >= DEFAULT_PLAYABLE_OPTIONS.length - 1) {
+        if (position == 0) {
             return;
         }
         ITEMS.clear();
         ITEM_MAP.clear();
         for (Note n : PitchConstants.DEFAULT_PLAYABLE_NOTES.get(position)) {
             addItem(n);
+        }
+    }
+
+    public static String serialize() {
+        StringBuffer str = new StringBuffer();
+        for (Note note: ITEMS) {
+            str.append(note.name()+" ");
+        }
+        return str.toString();
+    }
+
+    public static void deserialize(String str) {
+        ITEMS.clear();
+        ITEM_MAP.clear();
+        String strNotes[] = str.split(" ");
+        for (String s: strNotes) {
+            addItem(Note.valueOf(s));
+        }
+    }
+
+    public static void save(Context context) {
+        try {
+            FileOutputStream fOut = context.openFileOutput("playlist.txt",
+                    Context.MODE_PRIVATE);
+            OutputStreamWriter osw = new OutputStreamWriter(fOut);
+            osw.write(PlayContent.serialize());
+            osw.flush();
+            osw.close();
+            fOut.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public static void load(Context context) {
+        try {
+            FileInputStream fIn = context.openFileInput("playlist.txt");
+            InputStreamReader isr = new InputStreamReader(fIn);
+            char buf[] = new char[1024];
+            isr.read(buf);
+            String str = new String(buf);
+            deserialize(str);
+            isr.close();
+            fIn.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
     }
 }
