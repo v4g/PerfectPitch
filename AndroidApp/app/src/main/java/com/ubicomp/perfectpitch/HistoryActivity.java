@@ -27,8 +27,8 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
         String[] scores = getScoreHistory();
         String res = "Time:Notes:Score\n";
-        for (String s: scores) {
-            res += s + "\n";
+        for (int i = scores.length - 1; i > -1; i--) {
+            res += scores[i] + "\n";
         }
 
         historyText = (TextView) findViewById(R.id.historyTextView);
