@@ -9,4 +9,10 @@
 
     <!-- Select Notes Strings -->
     <string name="take_quiz">Take Quiz</string>
+
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="ble_not_supported">BLE is not supported on this device. I won\'t run</string>
+    <string name="device_not_found">Bluetooth device not found</string>
+    <string name="searching_device">Searching for Bluetooth device</string>
+
 </resources>

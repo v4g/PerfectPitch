@@ -19,6 +19,11 @@ public class MusicNote {
         mediaPlayer = MediaPlayer.create(context, this.note.getID());
     }
 
+    public MusicNote(int id, Context context) {
+        this.note = null;
+        mediaPlayer = MediaPlayer.create(context, id);
+    }
+
     public int getColor() {
         return this.note.getColor();
     }
@@ -45,6 +50,14 @@ public class MusicNote {
 
     public void play() {
         this.mediaPlayer.start();
+    }
+
+    public void stop() {
+        if (this.mediaPlayer.isPlaying())
+        {
+            this.mediaPlayer.pause();
+        }
+        this.mediaPlayer.seekTo(0);
     }
 
     @Override
