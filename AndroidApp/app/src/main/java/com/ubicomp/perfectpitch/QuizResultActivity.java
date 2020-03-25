@@ -48,7 +48,6 @@ public class QuizResultActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    // TODO: correct context?
     private void updateScoreHistory(int score, String notes) {
         try {
             final String scoreString = new String("" + System.currentTimeMillis() + ":" + notes + ":" + score + ",");
