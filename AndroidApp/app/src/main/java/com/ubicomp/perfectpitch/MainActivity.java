@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.ubicomp.perfectpitch.dummy.PlayContent;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button quizButton;
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
         }
+        SoundManager.initialize(this);
+        PlayContent.load(this);
+
     }
 
     private void deviceNotFoundToast() {

@@ -77,7 +77,7 @@ public class PlayableItemFragment extends Fragment {
                 if (adapter != null) {
                     adapter.notifyDataSetChanged();
                 }
-                defaultOptions.setSelection(PitchConstants.DEFAULT_PLAYABLE_OPTIONS.length - 1);
+                defaultOptions.setSelection(0);
             }
         });
         if (rv_view instanceof RecyclerView) {
@@ -151,5 +151,9 @@ public class PlayableItemFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Note item);
+    }
+
+    public void onAddClick(View v) {
+        PlayContent.add();
     }
 }

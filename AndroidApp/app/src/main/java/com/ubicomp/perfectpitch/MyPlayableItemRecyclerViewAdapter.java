@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import com.ubicomp.perfectpitch.PlayableItemFragment.OnListFragmentInteractionListener;
 import com.ubicomp.perfectpitch.dummy.PlayContent;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 /**
@@ -49,14 +51,25 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
         return new ViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mNoteNameView.setText(mValues.get(position).name());
-        int[] colors = {mValues.get(position).getColor()};
+    public void setNoteAsItem(final ViewHolder holder, Note note) {
+        holder.mItem = note;
+        holder.mNoteNameView.setText(note.name());
+        int[] colors = {note.getColor()};
         int[][] states = {new int[] { android.R.attr.state_enabled}};
         ColorStateList cl = new ColorStateList(states, colors);
         holder.mNoteNameView.setBackgroundTintList(cl);
+    }
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final Note note = mValues.get(position);
+        setNoteAsItem(holder, note);
+        holder.mNoteNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setNoteAsItem(holder,holder.mItem.getNext());
+                SoundManager.getInstance().play(holder.mItem);
+            }
+        });
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,12 +92,12 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
         Note item = PlayContent.remove(from);
         PlayContent.addAtPosition(item, to);
         updateSpinner();
-        notifyDataSetChanged();
     }
 
     public void updateSpinner() {
-        mSpinner.setSelection(PitchConstants.DEFAULT_PLAYABLE_OPTIONS.length - 1);
+        mSpinner.setSelection(0);
     }
+
     @Override
     public int getItemCount() {
         return mValues.size();
