@@ -61,7 +61,7 @@ public class QuizNotesActivity extends AppCompatActivity implements View.OnClick
         answers = new int[questionCountTotal];
 
         questionTitle = (TextView) findViewById(R.id.questionLabel);
-        questionTitle.setText("Question " + currentQuestion + " " + quiz.getQuestion(currentQuestion).getName());
+        questionTitle.setText("Question " + currentQuestion); // + " " + quiz.getQuestion(currentQuestion).getName());
 
         answerChoices = (RadioGroup) findViewById(R.id.answerChoices);
         answerChoices.setOrientation(LinearLayout.VERTICAL);
@@ -131,7 +131,7 @@ public class QuizNotesActivity extends AppCompatActivity implements View.OnClick
             if (currentQuestion == questionCountTotal) {
                 submitButton.setText(getString(R.string.submit_quiz));
             }
-            questionTitle.setText("Question " + currentQuestion + " " + quiz.getQuestion(currentQuestion).getName());
+            questionTitle.setText("Question " + currentQuestion); // + " " + quiz.getQuestion(currentQuestion).getName());
             answerChoices.clearCheck();
         }
 
