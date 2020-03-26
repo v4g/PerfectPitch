@@ -1,6 +1,9 @@
 package com.ubicomp.perfectpitch;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +21,7 @@ public class QuizResultActivity extends AppCompatActivity implements View.OnClic
 
     private Button homeButton;
     private TextView scoreTextView;
+    private FloatingActionButton circle;
 
     private int score;
     private String notes;
@@ -29,6 +33,7 @@ public class QuizResultActivity extends AppCompatActivity implements View.OnClic
 
         homeButton = (Button) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(this);
+        circle = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
         Intent intent = getIntent();
         score = intent.getIntExtra("score", -1);
@@ -37,6 +42,13 @@ public class QuizResultActivity extends AppCompatActivity implements View.OnClic
 
         scoreTextView = (TextView) findViewById(R.id.scoreTextView);
         scoreTextView.setText("" + score);
+        if (score >= 80) {
+            circle.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008577")));
+        } else if (score >= 50) {
+            circle.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF8C00")));
+        } else {
+            circle.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        }
     }
 
     @Override

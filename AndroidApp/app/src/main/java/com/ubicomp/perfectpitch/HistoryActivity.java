@@ -1,6 +1,8 @@
 package com.ubicomp.perfectpitch;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +17,9 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class HistoryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,12 +42,6 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new ScoreAdapter(getScoreHistory());
         recyclerView.setAdapter(mAdapter);
-
-        String[] scores = getScoreHistory();
-        String res = "Time:Notes:Score\n";
-        for (int i = scores.length - 1; i > -1; i--) {
-            res += scores[i] + "\n";
-        }
     }
 
     @Override
@@ -75,7 +72,9 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         catch (Exception e) {
             Log.e("Exception", e.toString());
         }
-        return ret.split(",");
+        String[] ans = ret.split(",");
+        Collections.reverse(Arrays.asList(ans));
+        return ans;
     }
 
     public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.MyViewHolder> {
@@ -84,12 +83,14 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public View mView;
             public TextView mContentView;
+            public TextView mScoreView;
             public String mEntry;
 
             public MyViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mContentView = (TextView) view.findViewById(R.id.dateText);
+                mScoreView = (TextView) view.findViewById(R.id.scoreText);
             }
         }
 
@@ -116,7 +117,16 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
             String year = ("" + c.get(Calendar.YEAR)).substring(2,4);
             int month = c.get(Calendar.MONTH) + 1;
             int day = c.get(Calendar.DAY_OF_MONTH);
-            holder.mContentView.setText(month + "/" + day + "/" + year + ", " + text[1] + ", " + text[2]);
+            holder.mContentView.setText(month + "/" + day + "/" + year + ": " + text[1]);
+            holder.mScoreView.setText(text[2]);
+            int score = Integer.parseInt(text[2]);
+            if (score >= 80) {
+                holder.mScoreView.setTextColor(Color.parseColor("#008577"));
+            } else if (score >= 50) {
+                holder.mScoreView.setTextColor(Color.parseColor("#FF8C00"));
+            } else {
+                holder.mScoreView.setTextColor(Color.RED);
+            }
         }
 
         @Override

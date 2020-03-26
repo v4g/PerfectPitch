@@ -40,6 +40,7 @@ public class QuizSelectNotesActivity extends AppCompatActivity implements View.O
             Button button = new Button(this);
             button.setId(View.generateViewId());
             button.setText(notes[i].name());
+            button.setTextSize(16f);
             button.setBackgroundColor(Color.WHITE);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
