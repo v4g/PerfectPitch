@@ -1,6 +1,7 @@
 package com.ubicomp.perfectpitch;
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,8 @@ public class MyPlayableItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPl
     public void setNoteAsItem(final ViewHolder holder, Note note) {
         holder.mItem = note;
         holder.mNoteNameView.setText(note.name());
-        int[] colors = {note.getColor()};
+        Color c = Color.valueOf(note.getColor());
+        int[] colors = {Color.argb(0.4f,c.red(), c.green(), c.blue())};
         int[][] states = {new int[] { android.R.attr.state_enabled}};
         ColorStateList cl = new ColorStateList(states, colors);
         holder.mNoteNameView.setBackgroundTintList(cl);
