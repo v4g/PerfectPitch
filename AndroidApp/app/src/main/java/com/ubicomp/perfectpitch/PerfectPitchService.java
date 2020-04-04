@@ -13,6 +13,9 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
 import android.content.Intent;
 import android.content.Context;
 import android.graphics.Color;
@@ -25,6 +28,7 @@ import android.util.Log;
 import com.ubicomp.perfectpitch.dummy.PlayContent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -130,6 +134,9 @@ public class PerfectPitchService extends IntentService {
         if (bluetoothGatt != null) {
             bluetoothGatt.disconnect();
         }
+        if (gatt != null) {
+            gatt.disconnect();
+        }
     }
 
     private void sendFinishedNotification() {
@@ -166,7 +173,7 @@ public class PerfectPitchService extends IntentService {
                     @Override
                     // New services discovered
                     public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-                        if (status == BluetoothGatt.GATT_SUCCESS) {
+                        if (status == BluetoothGatt.GATT_SUCCESS && gatt != null) {
                             Log.d("PerfectPitchService", "Services discovered");
                             BluetoothGattService s = gatt.getService(SERVICE_UUID);
                             BluetoothGattCharacteristic c = s.getCharacteristic(CHARACTERISTIC_UUID);
@@ -175,6 +182,10 @@ public class PerfectPitchService extends IntentService {
                             Log.w(TAG, "onServicesDiscovered received: " + status);
                         }
                     }
+                    @Override
+                    public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+                        Log.d("PerfectPitchService", "Characteristic status" + status);
+                    }
 
                 };
         final BluetoothAdapter.LeScanCallback leScanCallback =
@@ -182,9 +193,11 @@ public class PerfectPitchService extends IntentService {
                     @Override
                     public void onLeScan(final BluetoothDevice device, int rssi,
                                          byte[] scanRecord) {
-                        if (device.getName() != null && device.getName().equalsIgnoreCase(DEVICE_NAME)) {
+//                        Log.d("PerfectPitchService", device.toString());
+
+                        if (device.getName() != null && device.getName().equalsIgnoreCase(DEVICE_NAME) && !deviceFound) {
                             bluetoothGatt = device.connectGatt(context, false, gattCallback);
-                            Log.d("PerfectPitchService", bluetoothGatt.toString());
+                            Log.d("PerfectPitchService", "Device found" + bluetoothGatt.toString() + device.getAddress());
                             deviceFound = true;
                         }
                         Log.d("Perfect Pitch", device.getName() + device.getAddress() + device.toString());
@@ -245,7 +258,10 @@ public class PerfectPitchService extends IntentService {
             String col = colorToCodeMap.get(item.getColor());
             characteristic.setValue(col);
             i = (i + 1) % PlayContent.ITEMS.size();
-            gatt.writeCharacteristic(characteristic);
+
+            if (!gatt.writeCharacteristic(characteristic)) {
+                Log.e("PerfectPitchService", "Characteristic could not be written");
+            };
         }
     }
 
